@@ -2,10 +2,9 @@
 import sys
 
 class Vertice ():
-    def __init__(self, valor, rotulo):
-        self.valor = valor
+    def __init__(self, rotulo, valor):
         self.rotulo = rotulo
-        self.lista_adjacencia = []
+        self.valor = valor
 
     def get_lista_adjacencia(self):
         return self.lista_adjacencia
