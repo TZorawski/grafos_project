@@ -22,9 +22,9 @@ def main():
     a3 = Aresta(v3, v1, "a3", 2)
 
     # corrigir
-    # g1.add_aresta(a1)
-    # g1.add_aresta(a2)
-    # g1.add_aresta(a3)
+    g1.add_aresta(a1)
+    g1.add_aresta(a2)
+    g1.add_aresta(a3)
     
     print(g1)
 

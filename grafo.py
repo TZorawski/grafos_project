@@ -31,7 +31,7 @@ class Grafo ():
 
         # insere nova linha para representar novo vertice
         nova_linha = []
-        for i in range (len(self.lista_vertices) + 1):
+        for i in range (len(self.lista_vertices)):
             nova_linha.append(0)
         self.matriz_adj.append(nova_linha)
 
@@ -44,7 +44,7 @@ class Grafo ():
         self.matriz_adj[pos1][pos2] = 1
 
         # se grafo não é digrado, vertice2 também vai para vertice1
-        if (is_grafo_digrafo == False):
+        if (self.is_digrafo == False):
             self.matriz_adj[pos2][pos1] = 1
         
 
@@ -62,7 +62,7 @@ class Grafo ():
     def get_grau (self, vertice, is_grafo_digrafo):
         grau_entrada = 0
         grau_saida = 0
-        pos = encontra_pos_vertice(vertice)
+        pos = self.encontra_pos_vertice(vertice)
         
         for l in self.matriz_adj[pos]:
             if (l == 1):
@@ -83,12 +83,19 @@ class Grafo ():
                 return i
         return -1
 
+    def busca_largura (self, vertice):
+        cores_vertices = []
+        # cria estrutura adicional para gerenciar cores dos vertices na busca
+        for i in range (len(self.lista_vertices)):
+            cores_vertices.append(0)
+    
+    def busca_profundudade (self, vertice):
+        cores_vertices = []
+        # cria estrutura adicional para gerenciar cores dos vertices na busca
+        for i in range (len(self.lista_vertices)):
+            cores_vertices.append(0)
+
     # imprime grafo
     def __repr__(self):
         return '(Nº vertices: {} É digrafo: {}\nMatriz adj: {})'.format(len(self.lista_vertices), self.is_digrafo, self.matriz_adj)
 
-
-# add_node('a1')
-# add_node('b1')
-# add_node('c1')
-# add_node('d1')
