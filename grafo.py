@@ -84,16 +84,27 @@ class Grafo ():
         return -1
 
     def busca_largura (self, vertice):
-        cores_vertices = []
         # cria estrutura adicional para gerenciar cores dos vertices na busca
+        cores_vertices = [] # 0: branco; 1: cinza; 2: preto
         for i in range (len(self.lista_vertices)):
             cores_vertices.append(0)
     
-    def busca_profundudade (self, vertice):
-        cores_vertices = []
+    # busca_profundudade
+    def dfs (self, vertice):
+        tempo = 0
+
         # cria estrutura adicional para gerenciar cores dos vertices na busca
+        cores_vertices = [] # 0: branco; 1: cinza; 2: preto
         for i in range (len(self.lista_vertices)):
             cores_vertices.append(0)
+        
+        for v in self.lista_vertices:
+            pos = self.encontra_pos_vertice(v)
+            if cores_vertices[pos] == 0:
+                self.dfs_visit(v)
+
+    def dfs_visit (self, vertice):
+        pass
 
     # imprime grafo
     def __repr__(self):
