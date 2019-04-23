@@ -122,3 +122,18 @@ class Grafo ():
     def __repr__(self):
         return '(Nº vertices: {} É digrafo: {}\nMatriz adj: {})'.format(len(self.lista_vertices), self.is_digrafo, self.matriz_adj)
 
+    def getFTD (self, v1):        
+        pos = encontra_pos_vertice(v1)
+        FTDlist.append(v1) # O PRÓPRIO VÉRTICE PERTENCE AO FTD
+        aux = get_adjacentes(v1) 
+
+        for i in range (len(aux)): # OS VÉRTICES ADJACENTES AO V1 PERTENCEM AO FTD
+            FTDlist.append(aux[i])
+
+        #Percorrer o FTD 
+        #Inclui no FTD se o vértice não existe no FTD
+
+        # for j in range (len(self.matriz_adj[pos])): #com base na qtde de vértices existentes
+        #     if (self.matriz_adj[[pos][j]] == 1): # caso o valor na coluna correspondente ao 'i' seja 1:
+        #         FTDlist.append(self.lista_vertices[j]) # incluo o vértice corresponednte ao indice 'i' no FTDlist
+        
