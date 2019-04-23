@@ -75,6 +75,18 @@ class Grafo ():
 
         return [grau_saida, grau_entrada]
 
+    # retorna lista de nós adjacentes
+    def get_adjacentes (self, vertice):
+        pos = self.encontra_pos_vertice(vertice)
+        adjacentes = []
+
+        if (pos >= 0):
+            for i in range (len(self.matriz_adj[pos])):
+                if (self.matriz_adj[pos][i] == 1):
+                    adjacentes.append(self.lista_vertices[i])
+        
+        return adjacentes
+
     # retorna a posição do vértice
     # caso ele não pertença ao grafo, retorna -1
     def encontra_pos_vertice (self, vertice):
