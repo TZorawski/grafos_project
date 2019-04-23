@@ -6,5 +6,5 @@ class Vertice ():
         self.rotulo = rotulo
         self.valor = valor
 
-    def get_lista_adjacencia(self):
-        return self.lista_adjacencia
+    # def get_lista_adjacencia(self):
+    #     return self.lista_adjacencia

@@ -28,4 +28,6 @@ def main():
     
     print(g1)
 
+    g1.dfs()
+
 main()
