@@ -95,6 +95,65 @@ class Grafo ():
                 return i
         return -1
 
+    # retorna se grafo é completo
+    def is_completo(self):
+        for i in range(len(self.lista_vertices)):
+            for j in range(0 if self.is_digrafo == True else i, len(self.lista_vertices)):
+                if((i == j and self.matriz_adj[i][j] != 0) or (i != j and self.matriz_adj[i][j] != 1)):
+                    return False
+        
+        return True
+    
+    # retorna se grafo é conexo
+    def is_conexo(self, vertices_encontrados = None, vertice_inicial = None):
+        if vertices_encontrados is None:
+            vertices_encontrados = set()
+
+        vertices = self.lista_vertices
+
+        if not vertice_inicial:
+            vertice_inicial = vertices[0]
+
+        vertices_encontrados.add(vertice_inicial)
+
+        if(len(vertices_encontrados) != len(vertices)):
+            for vertice in self.get_adjacentes(vertice_inicial):
+                if(vertice not in vertices_encontrados):
+                    if(self.is_conexo(vertices_encontrados, vertice)):
+                        return True
+        else:
+            return True
+        return False
+
+    # retorna se há ou não ciclo no grafo
+    def is_ciclico(self, vertice = None, vertices_visitados = [], vertice_pai = None):
+        if(vertice is None):
+            vertice = self.lista_vertices[0]
+        
+        vertices_visitados.append(vertice)
+
+        for adjacent in self.get_adjacentes(vertice):
+            if(adjacent not in vertices_visitados):
+                if(self.is_ciclico(adjacent, vertices_visitados, vertice)):
+                    return True
+            elif(adjacent != vertice_pai):
+                return True
+  
+        return False
+
+    # retorna se grafo é uma árvore
+    def is_arvore(self):
+        vertices_visitados = []
+
+        if(self.is_ciclico(None, vertices_visitados)): 
+            return False
+        
+        for vertice in self.lista_vertices: 
+            if(vertice not in vertices_visitados): 
+                return False
+        
+        return True
+
     def busca_largura (self, vertice):
         # cria estrutura adicional para gerenciar cores dos vertices na busca
         cores_vertices = [] # 0: branco; 1: cinza; 2: preto
