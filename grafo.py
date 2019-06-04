@@ -59,7 +59,7 @@ class Grafo ():
     # retorna grau do vértice
     # se for digrafo => [grau_entrada, grau_saida]
     # se não for digrafo => [grau_vertice, 0]
-    def get_grau (self, vertice, is_grafo_digrafo):
+    def get_grau (self, vertice):
         grau_entrada = 0
         grau_saida = 0
         pos = self.encontra_pos_vertice(vertice)
@@ -68,7 +68,7 @@ class Grafo ():
             if (l == 1):
                 grau_saida += 1
 
-        if (is_grafo_digrafo == True):
+        if (self.is_digrafo == True):
             for i in self.matriz_adj:
                 if (i[pos] == 1):
                     grau_entrada += 1
@@ -107,7 +107,7 @@ class Grafo ():
     # retorna se grafo é conexo
     def is_conexo(self, vertices_encontrados = None, vertice_inicial = None):
         if vertices_encontrados is None:
-            vertices_encontrados = set()
+            vertices_encontrados = set()        # inicializa conjunto
 
         vertices = self.lista_vertices
 
@@ -203,3 +203,13 @@ class Grafo ():
         #     if (self.matriz_adj[[pos][j]] == 1): # caso o valor na coluna correspondente ao 'i' seja 1:
         #         FTDlist.append(self.lista_vertices[j]) # incluo o vértice corresponednte ao indice 'i' no FTDlist
         
+
+    def ordenacao_topologica (self):
+        grau_entrada = []
+        fila = []
+        for v in self.lista_vertices:
+            grau_entrada.append(self.get_grau(v))
+        
+        for i in range (len(self.lista_vertices)):
+            if grau_entrada[i] == 0:
+                # fila.push() continuar
