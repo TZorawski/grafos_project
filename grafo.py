@@ -188,7 +188,7 @@ class Grafo ():
     def __repr__(self):
         return '(Nº vertices: {} É digrafo: {}\nMatriz adj: {})'.format(len(self.lista_vertices), self.is_digrafo, self.matriz_adj)
 
-    def getFTD (self, v1):        
+    def getFTD (self, v1):
         pos = encontra_pos_vertice(v1)
         FTDlist.append(v1) # O PRÓPRIO VÉRTICE PERTENCE AO FTD
         aux = get_adjacentes(v1) 
@@ -204,12 +204,12 @@ class Grafo ():
         #         FTDlist.append(self.lista_vertices[j]) # incluo o vértice corresponednte ao indice 'i' no FTDlist
         
 
-    def ordenacao_topologica (self):
-        grau_entrada = []
-        fila = []
-        for v in self.lista_vertices:
-            grau_entrada.append(self.get_grau(v))
+    # def ordenacao_topologica (self):
+    #     grau_entrada = []
+    #     fila = []
+    #     for v in self.lista_vertices:
+    #         grau_entrada.append(self.get_grau(v))
         
-        for i in range (len(self.lista_vertices)):
-            if grau_entrada[i] == 0:
-                # fila.push() continuar
+    #     for i in range (len(self.lista_vertices)):
+    #         if grau_entrada[i] == 0:
+    #         # fila.push() continuar
