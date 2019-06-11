@@ -26,7 +26,7 @@ def main():
     g1.add_aresta(a3) # insere a aresta a3 no grafo
     
     print(g1)
-
+    g1.getFTD(v1)
     g1.dfs()
 
 main()

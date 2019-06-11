@@ -188,21 +188,44 @@ class Grafo ():
     def __repr__(self):
         return '(Nº vertices: {} É digrafo: {}\nMatriz adj: {})'.format(len(self.lista_vertices), self.is_digrafo, self.matriz_adj)
 
-    def getFTD (self, v1):
-        pos = encontra_pos_vertice(v1)
-        FTDlist.append(v1) # O PRÓPRIO VÉRTICE PERTENCE AO FTD
-        aux = get_adjacentes(v1) 
+    #----------------------------------------------------------------------------------------
 
-        for i in range (len(aux)): # OS VÉRTICES ADJACENTES AO V1 PERTENCEM AO FTD
-            FTDlist.append(aux[i])
+    # def existsInFtd(self, FTDlist, v):
+    #     pos1 = self.encontra_pos_vertice(v)
+    #     for i in range(len(FTDlist)):
+    #         pos2 = self.encontra_pos_vertice(FTDlist[i])
+    #         if(self.matriz_adj[pos1][pos2] == 1):
+    #             flag = 0
 
-        #Percorrer o FTD 
-        #Inclui no FTD se o vértice não existe no FTD
-
-        # for j in range (len(self.matriz_adj[pos])): #com base na qtde de vértices existentes
-        #     if (self.matriz_adj[[pos][j]] == 1): # caso o valor na coluna correspondente ao 'i' seja 1:
-        #         FTDlist.append(self.lista_vertices[j]) # incluo o vértice corresponednte ao indice 'i' no FTDlist
+    #     if(flag == 0):
+    #         print(flag)
+    #         return False # Se v já existe no FTD, não permite a inclusão novamente
+    #     if(flag == 1):
+    #         print(flag)
+    #         return True # Se v não existe no FTD, manda incluir
         
+    # def getFTD (self, v1):
+    #     FTDlist = []
+    #     FTDlist.append(v1) # O PRÓPRIO VÉRTICE PERTENCE AO FTD
+    #     aux = self.get_adjacentes(v1)
+    #     j = 1
+    #     while(j < len(FTDlist)+1):
+    #         for i in range (len(aux)): # OS VÉRTICES ADJACENTES A qualquer vértice na FTDlist PERTENCEM AO FTD
+    #             if(self.existsInFtd(FTDlist, aux[i])): # Caso o vértice não exista no FTD, insere 
+    # #                 FTDlist.append(aux[i])
+
+    #         # for i in range (len(FTDlist)):
+    #         #     print(len(FTDlist))
+
+    #         if(FTDlist[j]):
+    #             aux = self.get_adjacentes(FTDlist[j])
+    #         j += 1
+        
+    #     print('FTDlist: ')
+    #     for i in range (len(FTDlist)):
+    #         print(FTDlist[i].rotulo)        
+    
+    #----------------------------------------------------------------------------------------
 
     # def ordenacao_topologica (self):
     #     grau_entrada = []
