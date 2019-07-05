@@ -17,8 +17,12 @@ def main ():
   #    'https://api.github.com/search/repositories',
   #    params=b'q=requests+language:python',
   # )
+  # print(response.json())
 
   # REQUEST para Marvel
+  # { "apikey": chave pública da api,
+  # "ts": timestamp,
+  # "hash": md5(timestamp+chave privada+chave publica) }
   parametros = {
   "apikey": "2fd86138ee4056a8d6f596e7fda4d0e6",
   "ts": "04/07/201922:39",
@@ -27,7 +31,8 @@ def main ():
 
   # Pega todos os personagens
   # response = requests.get("https://gateway.marvel.com:443/v1/public/characters?", params=parametros)
-  
+  # print(response.json())
+
   # Pega o personagem 
   response = requests.get("https://gateway.marvel.com:443/v1/public/characters/1017100?", params=parametros)
 
