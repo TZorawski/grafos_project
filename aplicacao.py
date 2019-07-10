@@ -49,37 +49,37 @@ main()
 
 # ------------------------- Exemplos networkX -------------------------
 # nx.test() # executa testes
-G = nx.Graph() # adicionando um Grafo em networkX
-G.add_node(1) # adicionando um Nó em networkX
-G.add_nodes_from([2, 3]) # adicionando uma lista de Nós
-# um nó pode ser composto por números, palavras, objetos, etc... indefinido.
-
-G.add_edge(1, 2) # adicionando uma aresta
-e = (2, 3) # aresta
-G.add_edge(*e) # adicionando uma aresta
-
-G.add_edges_from([(1, 2), (1, 3)]) #adicionando uma lista de arestas
-
-# G.clear() # remover todos os vértices e arestas.
-
-print(G.number_of_nodes()) # função que retorna o número de nós
-print(G.number_of_edges()) # função que retorna o número de arestas
-
-# remover vértices & arestas
-# G.remove_node()
-# G.remove_nodes_from()
-# G.remove_edge()
-# G.remove_edges_from()
-
-H = nx.DiGraph(G) # cria um dígrafo
-
-# acessando arestas e vizinhos
-G[1]  # same as G.adj[1]
-G[1][2]
-
-# caso a aresta ja exista podemos realizar atribuições a elas.
-G[1][3]['color'] = "blue"
-G.edges[1, 2]['color'] = "red"
-
-# adicionando atributos a arestas
-G.add_edge(1, 2, weight = 4.7 )
+# G = nx.Graph() # adicionando um Grafo em networkX
+# G.add_node(1) # adicionando um Nó em networkX
+# G.add_nodes_from([2, 3]) # adicionando uma lista de Nós
+# # um nó pode ser composto por números, palavras, objetos, etc... indefinido.
+#
+# G.add_edge(1, 2) # adicionando uma aresta
+# e = (2, 3) # aresta
+# G.add_edge(*e) # adicionando uma aresta
+#
+# G.add_edges_from([(1, 2), (1, 3)]) #adicionando uma lista de arestas
+#
+# # G.clear() # remover todos os vértices e arestas.
+#
+# print(G.number_of_nodes()) # função que retorna o número de nós
+# print(G.number_of_edges()) # função que retorna o número de arestas
+#
+# # remover vértices & arestas
+# # G.remove_node()
+# # G.remove_nodes_from()
+# # G.remove_edge()
+# # G.remove_edges_from()
+#
+# H = nx.DiGraph(G) # cria um dígrafo
+#
+# # acessando arestas e vizinhos
+# G[1]  # same as G.adj[1]
+# G[1][2]
+#
+# # caso a aresta ja exista podemos realizar atribuições a elas.
+# G[1][3]['color'] = "blue"
+# G.edges[1, 2]['color'] = "red"
+#
+# # adicionando atributos a arestas
+# G.add_edge(1, 2, weight = 4.7 )
