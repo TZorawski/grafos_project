@@ -1,0 +1,33 @@
+Como fazer requisições com python:
+https://www.digitalocean.com/community/tutorials/como-utilizar-apis-web-no-python-3-es
+-------------
+Exemplos de apis:
+https://sensedia.com/blog/apis/as-apis-que-voce-precisa-conhecer-variedades-2/
+------------
+Gerar hash md5 para api Marvel:
+https://www.freeformatter.com/message-digest.html#ad-output
+-------------
+Biblioteca de grafos:
+https://networkx.github.io/
+-------------
+Requests em Python:
+https://www.pythonforbeginners.com/requests/using-requests-in-python
+https://realpython.com/python-requests/
+-------------
+
+MARVEL:
+
+Home site: https://developer.marvel.com/
+Entidades possíveis e seus atributos: https://developer.marvel.com/documentation/entity_types
+
+Exemplo de requests: https://developer.marvel.com/docs#!/public/getCharacterIndividual_get_1
+
+***
+Page para conseguir key: https://developer.marvel.com/signup (Use a que já está no github)
+Explicação sobre chaves: https://developer.marvel.com/documentation/authorization
+
+PUBLIC KEY: 2fd86138ee4056a8d6f596e7fda4d0e6
+PRIVATE KEY: e963497d1aa12e9844c41a7bfbb5ff43dd12f3d0
+***
+
+Painel com dados da minha conta (Thais): https://developer.marvel.com/account
