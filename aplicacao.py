@@ -31,19 +31,31 @@ def main ():
   }
 
   # Pega todos os personagens
-  # response = requests.get("https://gateway.marvel.com:443/v1/public/characters?", params=parametros)
+  response = requests.get("https://gateway.marvel.com:443/v1/public/characters?", params=parametros)
   # print(response.json())
 
   # Pega o personagem
   # response = requests.get("https://gateway.marvel.com:443/v1/public/characters/1017100?", params=parametros)
   #
   # # print(response.json().data.results[0].description)
-  # data = response.json()['data']
-  # results = data['results'][0]
-  # name = results['name']
+  data = response.json()['data']
+  results = data['results'][0]
+  name = results['name']
   # description = results['description']
   # print(name)
   # print(description)
+
+  G = nx.Graph() # adicionando um Grafo em networkX
+
+# Adiciona os dados da API no Grafo -------------------------------------------------------------------------------------
+# PROBLEMA: não está aceitando o objeto completo, por enquanto está populando o grafo somente com o nome dos personagens.
+  for v in data['results']:
+    # print v['name']
+    G.add_node(v['name']) # adicionando um Nó em networkX
+
+# Printa os nós(nomes dos personagens) a partir do grafo
+  for node in G:
+    print node
 
 main()
 
