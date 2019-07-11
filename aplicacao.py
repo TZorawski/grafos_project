@@ -37,6 +37,14 @@ class Character():
     def getStories(self):
         return self.__stories
 
+
+def getNodeByName (lista_personagens, nome) :
+    for p in lista_personagens:
+        if p.getName == nome:
+            return p
+        else:
+            None
+
 def main ():
     # Exemplo REQUEST
     # response = requests.get("http://jsonplaceholder.typicode.com/comments")
@@ -62,7 +70,7 @@ def main ():
     # PEGA TODOS OS PERSONAGENS-------------------------------------------------------------------------------------------------
     # Limite = 100 personagens
     # response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=101", params=parametros) # limit = 101+ não funciona
-    response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=100", params=parametros) #limit 100- funciona
+    response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=10", params=parametros) #limit 100- funciona
     # print(response.json())
 
     # --------------------------------------------------------------------------------------------------------------------------
@@ -71,6 +79,7 @@ def main ():
 
     # # print(response.json().data.results[0].description)
 
+    # print(response.json())
     data = response.json()['data']
     # results = data['results']
 
@@ -81,12 +90,23 @@ def main ():
     # ADICIONA OS DADOS DA API NO GRAFO -------------------------------------------------------------------------------------
     # PROBLEMA: não está aceitando o objeto completo, por enquanto está populando o grafo somente com o nome dos personagens.
     for v in data['results']:
-        obj = Character(v['name'], v['description'], v['comics'], v['stories'])
-        G.add_node(obj) # adicionando um Nó em networkX
+        comics_add = []
+        comics = v['comics']
+        items = comics['items']
+        for i in items:
+            comics_add.append(i['name'])
 
+        obj = Character(v['name'], v['description'], comics_add, v['stories'])
+        G.add_node(obj) # adicionando um Nó em networkX
+        comics_add = []
     # Printa os nós(nomes dos personagens) a partir do grafo
     for node in G:
-        aux = node.getStories()
+        for node2 in G:
+            if(node != node2):
+                for comic in node.getComics():
+                    if(comic in node.getComics()):
+                        G.add_edge(node,node2)
+                        # print("adiciona aresta entre: ", node.getName(), " e ", node2.getName(), " comic: ", comic)
         # print("----------------------- Comics ---------------------------")
         # Exemplo simples da composição dos Comics
         # {u'available': 0, u'items': [], u'returned': 0, u'collectionURI': u'http://gateway.marvel.com/v1/public/characters/1011266/stories'}
@@ -96,26 +116,51 @@ def main ():
 
     # --------------------------------------------------------------------------------------------------------------------------
     # QUEM FAZ COMICS COM QUEM ------------------------------------------------------------------------------------------------------
+        # for node2 in G:
+        #     for i in range(len(node.getStories()['items'])):
+        #         for j in range(len(node2.getStories()['items'])):
+        #             if (i != j)
+        #             if((node.getStories()['items'][i] == node2.getStories()['items'][j]) and node.getStories()['items'][i] not in ):
 
-    for node in G:
-        for node2 in G:
-            for i in range(len(node.getStories()['items'])):
-                for j in range((i+1), len(node2.getStories()['items'])):
-                    if(node.getStories()['items'][i] == node2.getStories()['items'][j]):
+        #                 G.add_edge(node, node2) # cria a aresta p/ conectar os dois nós
+                        # print('-------------------------------------------------------------------------------------------------')
+                        # print(node.getName())
+                        # print(node.getStories()['items'][i])
+                        # print('igual a:')
+                        # print(node2.getName())
+                        # print(node2.getStories()['items'][j])
+                        # print('-------------------------------------------------------------------------------------------------')
 
-                        G.add_edge(node, node2) # cria a aresta p/ conectar os dois nós
-                        print('-------------------------------------------------------------------------------------------------')
-                        print(node.getName())
-                        print(node.getStories()['items'][i])
-                        print('igual a:')
-                        print(node2.getName())
-                        print(node2.getStories()['items'][j])
-                        print('-------------------------------------------------------------------------------------------------')
+    # --------------------------------------------------------------------------------------------------------------------------
+    # EXECUTA A PROCURA DE DISTÂNCIA ------------------------------------------------------------------------------------------------------
 
-    print('Vértices(Personagens): ')
-    print(G.number_of_nodes())
-    print('Arestas(co-working em um comic):')
-    print(G.number_of_edges())
+    lista_personagens = list(G.nodes)
+    for p in lista_personagens:
+        print("Person: ", str(p.getName()))
+    # print(lista_personagens[0].getName())
+    # print(listac[0].getName())
+
+    # for c in listac:
+    #     print(c.getName())
+
+    # while True:
+    try:
+        menor_caminho = nx.shortest_path(G, lista_personagens[0], lista_personagens[1])
+        for c in menor_caminho:
+            print(c.getName())
+
+    except:
+        print('Não foi possível encontrar um caminho entre os dois atores\n')
+
+
+    # print('Vértices(Personagens): ')
+    # print(G.number_of_nodes())
+    # print('Arestas(co-working em um comic):')
+    # print(G.number_of_edges())
+
+    # shortest_path = nx.shortest_path(G, actor1, actor2)
+    # print('Foi encontrado um caminho entre os dois atores!')
+    # print('A distância mínima é ', len(shortest_path)-1)
 
 main()
 
