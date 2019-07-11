@@ -43,6 +43,8 @@ def getNodeByName (lista_personagens, nome) :
             return p
         else:
             None
+    novo_nome = input("Nome inválido. Digite outro: ")
+    return getNodeByName(lista_personagens, novo_nome)
 
 def main ():
     parametros = {
@@ -89,11 +91,11 @@ def main ():
     while True:
         node1 = input("Personagem 1: ")
         node1 = getNodeByName(lista_personagens, node1)
-        print(node1.getComics())
+        # print(node1.getComics())
 
         node2 = input("Personagem 2: ")
         node2 = getNodeByName(lista_personagens, node2)
-        print(node2.getComics())
+        # print(node2.getComics())
 
         menor_caminho = []
         try:
