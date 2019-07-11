@@ -4,6 +4,7 @@ import sys
 import json
 import requests
 import networkx as nx
+# import matplotlib.pyplot as plt # import necessário para gerar um gráfico, import Fail
 
 class Character():
     def __init__(self, name, description, comics, stories):
@@ -57,12 +58,15 @@ def main ():
     "hash": "5c6402e11e0fb933909e9057c87a0b94"
     }
 
-    # Pega todos os personagens -------------------------------------------------
+    # --------------------------------------------------------------------------------------------------------------------------
+    # PEGA TODOS OS PERSONAGENS-------------------------------------------------------------------------------------------------
     # Limite = 100 personagens
-    response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=10", params=parametros)
+    # response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=101", params=parametros) # limit = 101+ não funciona
+    response = requests.get("https://gateway.marvel.com:443/v1/public/characters?limit=100", params=parametros) #limit 100- funciona
     # print(response.json())
 
-    # Pega o personagem ---------------------------------------------------------
+    # --------------------------------------------------------------------------------------------------------------------------
+    # PEGA O PERSONAGEM --------------------------------------------------------------------------------------------------------
     # response = requests.get("https://gateway.marvel.com:443/v1/public/characters/1017100?", params=parametros)
 
     # # print(response.json().data.results[0].description)
@@ -72,7 +76,9 @@ def main ():
 
     G = nx.Graph() # adicionando um Grafo em networkX
     obj = []
-    # Adiciona os dados da API no Grafo -------------------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------------------------------------------------------
+    # ADICIONA OS DADOS DA API NO GRAFO -------------------------------------------------------------------------------------
     # PROBLEMA: não está aceitando o objeto completo, por enquanto está populando o grafo somente com o nome dos personagens.
     for v in data['results']:
         obj = Character(v['name'], v['description'], v['comics'], v['stories'])
@@ -80,8 +86,36 @@ def main ():
 
     # Printa os nós(nomes dos personagens) a partir do grafo
     for node in G:
-        print("----------------------- Comics ---------------------------")
-        print(node.getComics())
+        aux = node.getStories()
+        # print("----------------------- Comics ---------------------------")
+        # Exemplo simples da composição dos Comics
+        # {u'available': 0, u'items': [], u'returned': 0, u'collectionURI': u'http://gateway.marvel.com/v1/public/characters/1011266/stories'}
+        # print(aux['collectionURI'])
+        # print(aux['items'][0])
+        # print()
+
+    # --------------------------------------------------------------------------------------------------------------------------
+    # QUEM FAZ COMICS COM QUEM ------------------------------------------------------------------------------------------------------
+
+    for node in G:
+        for node2 in G:
+            for i in range(len(node.getStories()['items'])):
+                for j in range((i+1), len(node2.getStories()['items'])):
+                    if(node.getStories()['items'][i] == node2.getStories()['items'][j]):
+
+                        G.add_edge(node, node2) # cria a aresta p/ conectar os dois nós
+                        print('-------------------------------------------------------------------------------------------------')
+                        print(node.getName())
+                        print(node.getStories()['items'][i])
+                        print('igual a:')
+                        print(node2.getName())
+                        print(node2.getStories()['items'][j])
+                        print('-------------------------------------------------------------------------------------------------')
+
+    print('Vértices(Personagens): ')
+    print(G.number_of_nodes())
+    print('Arestas(co-working em um comic):')
+    print(G.number_of_edges())
 
 main()
 
