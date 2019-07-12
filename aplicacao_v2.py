@@ -105,6 +105,8 @@ def main ():
                 print("Menor Caminho = 0")
                 print("Esses personagens já participaram de um mesmo quadrinho")
             else: # Significa que tem um ou mais vértices entre os personagens
+                for x in menor_caminho:
+                    print(x.getName())
                 print("Menor Caminho = ", len(menor_caminho) - 2)
         except:
             print('Não foi possível encontrar um caminho entre os dois atores\n')
